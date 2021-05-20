@@ -7,6 +7,10 @@ import os
 import requests
 import json
 
+# Developer: NightfallGT
+# Discord webhook and text dump functionality: KliqxTV
+# Educational purposes only
+
 WEBHOOK_URL = '<your webhook url>'
 
 def logo_qr():
