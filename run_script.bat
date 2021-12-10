@@ -1,2 +1,2 @@
-python qr_generator.py
+.venv\scripts\python.exe qr_generator.py
 pause
