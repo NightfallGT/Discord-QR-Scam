@@ -1,10 +1,14 @@
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from PIL import Image
-import base64
-import time
 import os
+import time
+import base64
+from PIL import Image
+from bs4 import BeautifulSoup
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # Developer: NightfallGT
 # Educational purposes only
@@ -32,7 +36,18 @@ def main():
     driver = webdriver.Chrome(options=options, service=Service(r'chromedriver.exe'))
 
     driver.get('https://discord.com/login')
-    time.sleep(5)
+
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".qrCode-wG6ZgU"))
+    )
+
+    while True:
+        qr_code = driver.find_element(By.CSS_SELECTOR, ".qrCode-wG6ZgU")
+        if "spinner-2enMB9" in qr_code.get_attribute("class"):
+            time.sleep(0.5)
+        else:
+            break
+
     print('- Page loaded.')
 
     page_source = driver.page_source
