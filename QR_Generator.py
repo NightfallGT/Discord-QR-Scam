@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from PIL import Image
 import base64
 import time
@@ -28,7 +29,7 @@ def main():
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     options.add_experimental_option('detach', True)
-    driver = webdriver.Chrome(options=options, executable_path=r'chromedriver.exe')
+    driver = webdriver.Chrome(options=options, service=Service(r'chromedriver.exe'))
 
     driver.get('https://discord.com/login')
     time.sleep(5)
