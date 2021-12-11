@@ -82,6 +82,7 @@ def main():
             break
 
     print('\nTask complete.')
+    print("Press any key to exit...", end="")
 
 
 if __name__ == '__main__':
@@ -89,4 +90,6 @@ if __name__ == '__main__':
         main()
     except Exception:
         print("\nAn Unexpected Error Has Occured")
-        print("The program will now exit")
+        print("The program will now exit...", end="")
+
+    input()
