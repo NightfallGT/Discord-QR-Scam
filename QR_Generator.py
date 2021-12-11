@@ -15,6 +15,10 @@ from selenium.webdriver.support import expected_conditions as EC
 os.system('cls' if os.name == 'nt' else 'clear')
 
 
+class Timeout(Exception):
+    """Raise when connection times out"""
+
+
 def logo_qr():
     im1 = Image.open('temp/qr_code.png', 'r')
     im2 = Image.open('temp/overlay.png', 'r')
@@ -49,12 +53,17 @@ def main():
         EC.presence_of_element_located((By.CSS_SELECTOR, '.qrCode-wG6ZgU'))
     )
 
-    while True:
+    loaded = False
+    for i in range(90):
         qr_code = driver.find_element(By.CSS_SELECTOR, '.qrCode-wG6ZgU')
         if 'spinner-2enMB9' in qr_code.get_attribute('class'):
             time.sleep(0.5)
         else:
+            loaded = True
             break
+
+    if not loaded:
+        raise Timeout('QR Code timed out')
 
     print('- Page loaded.')
 
@@ -92,6 +101,9 @@ def main():
 if __name__ == '__main__':
     try:
         main()
+    except Timeout:
+        print('\nThe QR Code took too long to load (>45 sec)')
+        print('The program will now exit...', end='')
     except Exception:
         print('\nAn Unexpected Error Has Occured')
         print('The program will now exit...', end='')
