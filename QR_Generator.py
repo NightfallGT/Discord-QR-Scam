@@ -41,6 +41,7 @@ def main():
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     options.add_experimental_option('detach', True)
+    options.add_argument("--incognito")
 
     driver = webdriver.Chrome(
         options=options,
