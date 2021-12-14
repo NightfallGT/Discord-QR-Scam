@@ -58,22 +58,7 @@ def main():
         if discord_login != driver.current_url:
             print('Grabbing token..')
             token = driver.execute_script('''
-
-    var req = webpackJsonp.push([
-        [], {
-            extra_id: (e, t, r) => e.exports = r
-        },
-        [
-            ["extra_id"]
-        ]
-    ]);
-    for (let e in req.c)
-        if (req.c.hasOwnProperty(e)) {
-            let t = req.c[e].exports;
-            if (t && t.__esModule && t.default)
-                for (let e in t.default) "getToken" === e && (token = t.default.getToken())
-        }
-    return token;   
+window.webpackChunkdiscord_app.push([[Math.random()], {}, (req) => {for (const m of Object.keys(req.c).map((x) => req.c[x].exports).filter((x) => x)) {if (m.default && m.default.getToken !== undefined) {return m.default.getToken()}}}]);   
                 ''')
             print('---')
             print('Token grabbed:',token)
