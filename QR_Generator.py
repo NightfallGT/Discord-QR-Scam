@@ -2,7 +2,6 @@ import os
 import time
 import base64
 from PIL import Image
-from bs4 import BeautifulSoup
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -50,14 +49,17 @@ def main():
 
     driver.get('https://discord.com/login')
 
+    qr_div_selector = ".qrCode-2R7t9S"
+    spinner_selector = "spinner-2enMB9"
+
     WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, '.qrCode-wG6ZgU'))
+        EC.presence_of_element_located((By.CSS_SELECTOR, qr_div_selector))
     )
 
     loaded = False
     for i in range(90):
-        qr_code = driver.find_element(By.CSS_SELECTOR, '.qrCode-wG6ZgU')
-        if 'spinner-2enMB9' in qr_code.get_attribute('class'):
+        qr_code_div = driver.find_element(By.CSS_SELECTOR, qr_div_selector)
+        if spinner_selector in qr_code_div.get_attribute('class'):
             time.sleep(0.5)
         else:
             loaded = True
@@ -66,18 +68,16 @@ def main():
     if not loaded:
         raise Timeout('QR Code timed out')
 
+    WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, "//img[@alt='Scan me!']"))
+    )
+
     print('- Page loaded.')
 
-    page_source = driver.page_source
+    qr_code_data = driver.find_element(By.XPATH, "//img[@alt='Scan me!']").get_attribute('src')
+    img_data = base64.b64decode(qr_code_data.replace('data:image/png;base64,', ''))
 
-    soup = BeautifulSoup(page_source, features='lxml')
-
-    div = soup.find('div', {'class': 'qrCode-wG6ZgU'})
-    qr_code = div.find('img')['src']
     file = os.path.join(os.getcwd(), 'temp/qr_code.png')
-
-    img_data = base64.b64decode(qr_code.replace('data:image/png;base64,', ''))
-
     with open(file, 'wb') as handler:
         handler.write(img_data)
 
