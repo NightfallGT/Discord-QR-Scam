@@ -22,7 +22,7 @@ class Timeout(Exception):
     """Raise when connection times out"""
 
 
-# Generate GR Code
+# Generate QR Code
 def logo_qr():
     im1 = Image.open('temp/qr_code.png', 'r')
     im2 = Image.open('temp/overlay.png', 'r')
@@ -58,35 +58,18 @@ def main():
 
     driver.get('https://discord.com/login')
 
-    # Locator Variables
-    qr_div_selector = '.qrCode-2R7t9S'
-    spinner_selector = 'spinner-2enMB9'
-
     # Wait for Page to Load
-    WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, qr_div_selector))
-    )
-
-    loaded = False
-    for i in range(90):
-        qr_code_div = driver.find_element(By.CSS_SELECTOR, qr_div_selector)
-        if spinner_selector in qr_code_div.get_attribute('class'):
-            time.sleep(0.5)
-        else:
-            loaded = True
-            break
-
-    if not loaded:
+    try:
+        qr_code_img = WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, '//img[@alt=\'Scan me!\']'))
+        )
+    except Exception:
         raise Timeout('QR Code timed out')
-
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, '//img[@alt=\'Scan me!\']'))
-    )
 
     print('- Page loaded.')
 
     # Extract QR Code Data
-    qr_code_data = driver.find_element(By.XPATH, '//img[@alt=\'Scan me!\']').get_attribute('src')
+    qr_code_data = qr_code_img.get_attribute('src')
     img_data = base64.b64decode(qr_code_data.replace('data:image/png;base64,', ''))
 
     # Generate File
@@ -124,10 +107,11 @@ if __name__ == '__main__':
     try:
         main()
     except Timeout:
-        print('\nThe QR Code took too long to load (>45 sec)')
+        print('\nThe QR Code took too long to load (>30 sec)')
         print('The program will now exit...', end='')
     except Exception:
         print('\nAn Unexpected Error Has Occured')
         print('The program will now exit...', end='')
 
+    # Wait Before Closing
     input()
