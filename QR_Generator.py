@@ -4,6 +4,7 @@ from PIL import Image
 import base64
 import time
 import os
+import re
 
 # Developer: NightfallGT
 # Educational purposes only
@@ -38,7 +39,7 @@ def main():
 
     soup = BeautifulSoup(page_source, features='lxml')
 
-    div = soup.find('div', {'class': 'qrCode-wG6ZgU'})
+    div = soup.find('div', {'class': re.compile("qrCode-([a-z]|[A-Z]|[0-9]){5,7}")})
     qr_code = div.find('img')['src']
     file = os.path.join(os.getcwd(), 'temp/qr_code.png')
 
